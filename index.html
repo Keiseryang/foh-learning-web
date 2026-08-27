@@ -409,6 +409,37 @@
   .result-row.bad b { color: var(--accent); }
   .result-exp { display: block; font-size: 12px; color: var(--muted); opacity: .85; margin-top: 3px; padding-left: 20px; }
 
+
+  /* 考试浮层（娱乐版） */
+  .exam-modal {
+    position: fixed; inset: 0; z-index: 300;
+    background: rgba(0,0,0,.6); backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .exam-modal.open { display: flex; }
+  .exam-modal-box {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+    max-width: 760px; width: 100%; max-height: 88vh; overflow-y: auto;
+    padding: 30px; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  }
+  .exam-close {
+    position: absolute; top: 14px; right: 18px;
+    width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--card-2); color: var(--text); font-size: 16px; cursor: pointer;
+    transition: background .2s;
+  }
+  .exam-close:hover { background: var(--accent); color: var(--on-accent); }
+  .exam-title { font-size: 24px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+  .exam-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  .nav-exam {
+    flex-shrink: 0; background: var(--card-2); color: var(--accent);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 6px 12px; font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .nav-exam:hover { border-color: var(--accent); background: rgba(var(--accent-rgb), .12); }
+
 </style>
 </head>
 <body>
@@ -430,12 +461,12 @@
   <div class="inner">
     <span class="brand">▶ FOH</span>
     <button id="theme-toggle" title="切换深/浅色主题" aria-label="切换主题">🌙</button>
+    <button class="nav-exam" id="exam-toggle" title="娱乐测试">🎓 考试（娱乐版）</button>
     <a href="#mindset">认知差异</a>
     <a href="#workflow">现场工作流</a>
     <a href="#framework">七大方向</a>
     <a href="#keypoints">核心重点</a>
     <a href="#roadmap">学习路线</a>
-    <a href="#checklist">模拟考试</a>
     <a href="#gear">设备速查</a>
     <a href="#trouble">故障排查</a>
     <a href="#glossary">术语表</a>
@@ -889,40 +920,13 @@
 </section>
 
 <!-- 模拟考试 -->
-<section id="checklist">
-  <h2><span class="idx">06</span>模拟考试 · 现场调音师能力测验</h2>
-  <p class="lead">随机抽 10 道现场场景题，每题 10 分，共 100 分。<b style="color:var(--accent)">80 分以上合格</b>。点「开始考试」随机生成题目，答完交卷看结果。</p>
-  <div class="exam">
-    <div class="exam-start" id="exam-start">
-      <div class="exam-info">
-        <div class="exam-stat"><b>10</b><span>题目数</span></div>
-        <div class="exam-stat"><b>100</b><span>总分</span></div>
-        <div class="exam-stat"><b>80</b><span>合格线</span></div>
-      </div>
-      <button id="start-exam" class="exam-btn">开始考试</button>
-    </div>
-    <div class="exam-body" id="exam-body" style="display:none">
-      <div class="exam-progress">
-        第 <b id="q-now">1</b> / <span id="q-total">10</span> 题
-        <div class="bar"><div class="fill" id="exam-fill"></div></div>
-      </div>
-      <div id="exam-questions"></div>
-      <button id="submit-exam" class="exam-btn">交卷</button>
-    </div>
-    <div class="exam-result" id="exam-result" style="display:none">
-      <div class="result-score" id="result-score">0</div>
-      <div class="result-verdict" id="result-verdict"></div>
-      <div class="result-detail" id="result-detail"></div>
-      <button id="retry-exam" class="exam-btn">再考一次</button>
-    </div>
-  </div>
-</section>
+
 
 </section>
 
 <!-- 设备知识库 -->
 <section id="gear">
-  <h2><span class="idx">07</span>设备知识库 · 速查</h2>
+  <h2><span class="idx">06</span>设备知识库 · 速查</h2>
   <p class="lead">混音师到现场，第一件事是「认设备」。以下三张速查表覆盖最常遇到的现场硬件，<b style="color:var(--accent)">点击卡片展开</b>。</p>
   <div class="modules">
 
@@ -1042,7 +1046,7 @@
 
 <!-- 故障排查手册 -->
 <section id="trouble">
-  <h2><span class="idx">08</span>实战故障排查手册</h2>
+  <h2><span class="idx">07</span>实战故障排查手册</h2>
   <p class="lead">现场出问题不可怕，可怕的是慌。按「症状 → 可能原因 → 排查步骤」练习，<b style="color:var(--accent)">点击卡片展开</b>。</p>
   <div class="modules">
 
@@ -1261,7 +1265,7 @@
 
 <!-- 术语表 -->
 <section id="glossary">
-  <h2><span class="idx">09</span>术语表 · 18 个速查</h2>
+  <h2><span class="idx">08</span>术语表 · 18 个速查</h2>
   <p class="lead">听懂老师傅的话，是入行的第一课。遇到新词先查这里，建议收藏。</p>
   <div class="proto-wrap">
     <table class="proto-table">
@@ -1294,7 +1298,7 @@
 
 <!-- 30 天训练计划 -->
 <section id="plan">
-  <h2><span class="idx">10</span>30 天现场训练计划</h2>
+  <h2><span class="idx">09</span>30 天现场训练计划</h2>
   <p class="lead">按「系统观 → 台子操作 → 话筒摆位 → 实战演练」四阶段安排，每天 15–30 分钟。<b style="color:var(--accent)">点卡片看任务，勾选打卡，进度自动保存</b>。</p>
   <div class="checklist">
     <div class="progress">
@@ -1893,14 +1897,77 @@
     document.getElementById('result-detail').innerHTML = detail;
     examBody.style.display = 'none';
     examResult.style.display = 'block';
-    window.scrollTo({ top: document.getElementById('checklist').offsetTop - 60, behavior: 'smooth' });
+    // 滚动到浮层内结果区（浮层盒子）
+    const box = document.querySelector('.exam-modal-box');
+    if (box) box.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   startBtn.addEventListener('click', startExam);
   document.getElementById('submit-exam').addEventListener('click', submitExam);
   document.getElementById('retry-exam').addEventListener('click', startExam);
   examQuestions.addEventListener('change', updateExamProgress);
+
+  // 考试浮层开关
+  const examModal = document.getElementById('exam-modal');
+  const examToggle = document.getElementById('exam-toggle');
+  const examClose = document.getElementById('exam-close');
+  function openExam() {
+    examModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    examStart.style.display = 'block';   // 每次打开回到开始页
+    examBody.style.display = 'none';
+    examResult.style.display = 'none';
+  }
+  function closeExam() {
+    examModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  examToggle.addEventListener('click', openExam);
+  examClose.addEventListener('click', closeExam);
+  // 点击浮层空白外关闭
+  examModal.addEventListener('click', e => {
+    if (e.target === examModal) closeExam();
+  });
+  // Esc 关闭
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && examModal.classList.contains('open')) closeExam();
+  });
 </script>
+
+<!-- 娱乐考试浮层 -->
+<div class="exam-modal" id="exam-modal">
+  <div class="exam-modal-box">
+    <button class="exam-close" id="exam-close" title="关闭">✕</button>
+    <h2 class="exam-title">🎓 考试（娱乐版）</h2>
+    <p class="exam-sub">随机抽 10 道题，每题 10 分，共 100 分，<b style="color:var(--accent)">80 分以上合格</b>。玩得开心！</p>
+    <div class="exam" id="exam-wrap">
+<div class="exam">
+    <div class="exam-start" id="exam-start">
+      <div class="exam-info">
+        <div class="exam-stat"><b>10</b><span>题目数</span></div>
+        <div class="exam-stat"><b>100</b><span>总分</span></div>
+        <div class="exam-stat"><b>80</b><span>合格线</span></div>
+      </div>
+      <button id="start-exam" class="exam-btn">开始考试</button>
+    </div>
+    <div class="exam-body" id="exam-body" style="display:none">
+      <div class="exam-progress">
+        第 <b id="q-now">1</b> / <span id="q-total">10</span> 题
+        <div class="bar"><div class="fill" id="exam-fill"></div></div>
+      </div>
+      <div id="exam-questions"></div>
+      <button id="submit-exam" class="exam-btn">交卷</button>
+    </div>
+    <div class="exam-result" id="exam-result" style="display:none">
+      <div class="result-score" id="result-score">0</div>
+      <div class="result-verdict" id="result-verdict"></div>
+      <div class="result-detail" id="result-detail"></div>
+      <button id="retry-exam" class="exam-btn">再考一次</button>
+    </div>
+  </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
