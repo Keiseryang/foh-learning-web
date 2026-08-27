@@ -109,7 +109,7 @@
     position: relative; overflow: hidden;
     cursor: pointer;
   }
-  .module:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .module:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 8px 30px rgba(255,107,74,.25); }
   .module.open { border-color: var(--accent); }
   .module .m-head {
     display: flex; align-items: flex-start; gap: 12px;
@@ -118,13 +118,13 @@
     border-radius: var(--radius); transition: background .2s;
     position: relative;
   }
-  .module .m-head:hover { background: rgba(255,107,74,.06); }
+  .module .m-head:hover { background: rgba(255,107,74,.14); }
   .module .m-num {
     width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
     font-weight: 800; font-size: 17px; transition: transform .2s, background .2s;
   }
-  .module .m-head:hover .m-num { background: rgba(255,107,74,.15); }
+  .module .m-head:hover .m-num { background: rgba(255,107,74,.32); color: #fff; }
   .module .m-title { flex: 1; min-width: 0; }
   .module h3 { font-size: 17px; font-weight: 700; line-height: 1.4; transition: color .2s; }
   .module .m-head:hover h3 { color: var(--accent-2); }
@@ -145,7 +145,7 @@
     50% { opacity: .45; }
   }
   .module .m-head:hover .toggle {
-    color: var(--accent); background: rgba(255,107,74,.15); transform: scale(1.15);
+    color: #fff; background: var(--accent); transform: scale(1.15);
     animation: togglePulse 1s ease-in-out infinite;
   }
   .module.open .toggle { transform: rotate(45deg); color: var(--accent); animation: none; }
