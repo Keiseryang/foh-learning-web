@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>录音棚混音师 → 现场调音师 · 转行方向指南</title>
+<title>现场音频工程师指南 · FOH 学习框架</title>
 <style>
   :root {
     --bg: #0d1117;
@@ -141,6 +141,19 @@
   .diff-card li:last-child { border-bottom: none; }
   .diff-card li b { color: var(--text); font-weight: 600; }
   .diff-card.live li b { color: var(--accent-2); }
+
+  /* 认知差异方法论块 */
+  .diff-approach {
+    margin-top: 22px; background: var(--card); border: 1px solid var(--border);
+    border-left: 4px solid var(--accent); border-radius: var(--radius); padding: 20px 22px;
+  }
+  .diff-approach h3 { font-size: 17px; font-weight: 700; color: var(--accent-2); margin-bottom: 10px; }
+  .diff-approach p { font-size: 14px; color: var(--text-strong); margin-bottom: 12px; line-height: 1.7; }
+  .diff-approach ul { list-style: none; }
+  .diff-approach li {
+    position: relative; padding: 5px 0 5px 20px; font-size: 13px; color: var(--muted);
+  }
+  .diff-approach li::before { content: "›"; position: absolute; left: 4px; color: var(--accent); font-weight: 700; }
 
   /* 方向卡片（可点击展开） */
   .modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
@@ -475,9 +488,9 @@
 </nav>
 
 <header class="hero">
-  <div class="tag">录音棚后期混音师 · 转行方向指南</div>
-  <h1>从「录音棚混音」到「现场调音」<br><span class="arrow">Studio → FOH 方向与手段</span></h1>
-  <p class="sub">混音师从录音棚转现场，缺的不是混音审美，而是系统观、实时决策和舞台协作。以下七个方向，各配一套可执行的学习手段。</p>
+  <div class="tag">现场音频工程师 · 长期指南</div>
+  <h1>从混音思维到现场系统<br><span class="arrow">现场音频工程师 · 能力指南</span></h1>
+  <p class="sub">把每场演出都当作在录音棚里混音——靠校准系统与固定工作流，让现场少一点临场应激，多一分一次到位。以下方向帮你建立这套能力。</p>
   <div class="stats">
     <div class="stat"><div class="num">7</div><div class="label">大学习方向</div></div>
     <div class="stat"><div class="num">3</div><div class="label">种工作流</div></div>
@@ -489,27 +502,34 @@
 
 <!-- 认知差异 -->
 <section id="mindset">
-  <h2><span class="idx">01</span>认知差异：录音棚 vs 现场</h2>
-  <p class="lead">转行先转思维：现场的核心是「系统」和「实时」，混音师要从对成品负责，转向对整场演出的每个瞬间负责。</p>
+  <h2><span class="idx">01</span>认知差异：录音棚思维 × 现场执行</h2>
+  <p class="lead">后期与现场最大的差异，其实只有两个词：<b style="color:var(--accent)">时间</b>与<b style="color:var(--accent)">容错率</b>。理解了这两点，剩下的都是手法。</p>
   <div class="diff-grid">
     <div class="diff-card studio">
-      <h3>🎛 录音棚混音（已有能力）</h3>
+      <h3>🎛 录音棚混音</h3>
       <ul>
-        <li><b>时间：</b>可反复修改、无限回放</li>
-        <li><b>监听：</b>精准监听室</li>
-        <li><b>工具：</b>DAW + 插件 + 自动化</li>
-        <li><b>容错：</b>出错可撤销</li>
+        <li><b>时间：</b>可反复修改、无限回放，允许慢慢打磨</li>
+        <li><b>容错率：</b>高——出错可撤销、重来，没人当场听见</li>
+        <li><b>成品：</b>对最终的录音负责</li>
       </ul>
     </div>
     <div class="diff-card live">
-      <h3>🔊 现场调音（需要转向）</h3>
+      <h3>🔊 现场调音</h3>
       <ul>
-        <li><b>时间：</b>实时一次成型</li>
-        <li><b>监听：</b>PA 系统 + 现场噪声</li>
-        <li><b>工具：</b>调音台 + 系统处理器</li>
-        <li><b>容错：</b>出错全场听见</li>
+        <li><b>时间：</b>实时一次成型，没有第二次机会</li>
+        <li><b>容错率：</b>低——出错全场听见，没得撤销</li>
+        <li><b>成品：</b>对整场演出的每个瞬间负责</li>
       </ul>
     </div>
+  </div>
+  <div class="diff-approach">
+    <h3>我的做法 · 把现场当录音棚</h3>
+    <p>既然差异只在<b>时间</b>和<b>容错率</b>，那我的应对是：<b>把每一场演出都当作在录音棚里混音</b>——不是靠临场感觉，而是尽量在演出前就把系统<b>校准</b>到位，让现场的混音手法和工作流跟录音棚<b>保持一致</b>。</p>
+    <ul>
+      <li>系统提前校准、建立模板，让每次混音都在同一套基准上开始</li>
+      <li>把「实时、不可撤销」的压力，转化成「提前就位、一次到位」的习惯</li>
+      <li>工作流固定下来，现场只是执行，而不是即兴创作</li>
+    </ul>
   </div>
 </section>
 
@@ -873,7 +893,7 @@
 <!-- 核心重点 -->
 <section id="keypoints">
   <h2><span class="idx">04</span>核心重点 · 6 件事</h2>
-  <p class="lead">录音棚转现场最容易踩坑的地方，按优先级排序。</p>
+  <p class="lead">现场最容易踩坑的地方，按优先级排序。</p>
   <div class="keypoints">
     <div class="kp"><h4>① 增益架构与 Headroom</h4><p>现场必须预留 15–20dB 余量，防止乐手瞬间推大动态。</p></div>
     <div class="kp"><h4>② 啸叫管理</h4><p>听出啸叫前兆、快速用陷波器压住，是现场基本功。</p></div>
@@ -887,7 +907,7 @@
 <!-- 学习路线 -->
 <section id="roadmap">
   <h2><span class="idx">05</span>学习路线 · 三阶段</h2>
-  <p class="lead">有录音棚功底可适当加速。</p>
+  <p class="lead">有前期功底可按自身节奏加速。</p>
   <div class="roadmap">
     <div class="stage">
       <span class="phase">阶段 1 · 打基础</span>
@@ -1642,8 +1662,8 @@
 </section>
 
 <footer>
-  <p>从录音棚到现场，混音师缺的不是耳朵，而是<b>系统观与实时经验</b>——这两样都可以靠跑场练出来。</p>
-  <p style="margin-top:12px;opacity:.6">Studio → FOH 方向指南 · 建议收藏</p>
+  <p>现场音频工程师缺的不是耳朵，而是<b>系统观、校准与固定的工作流</b>——这些都可以靠跑场和复盘练出来。</p>
+  <p style="margin-top:12px;opacity:.6">现场音频工程师指南 · 建议收藏</p>
 </footer>
 
 <!-- 娱乐考试浮层 -->
