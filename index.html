@@ -21,6 +21,35 @@
     --pink: #f472b6;
     --radius: 14px;
     --shadow: 0 8px 30px rgba(0,0,0,.35);
+    /* 语义化变量（用于随主题切换） */
+    --nav-bg: rgba(13,17,23,.85);
+    --text-strong: #c9d4e0;      /* 正文强色 */
+    --line: rgba(255,255,255,.06); /* 细分隔线 */
+    --white: #fff;                /* 强调底上的白字 */
+    --on-accent: #fff;
+  }
+
+  /* 浅色主题 */
+  :root[data-theme="light"] {
+    --bg: #f5f7fa;
+    --bg-2: #eef1f5;
+    --card: #ffffff;
+    --card-2: #e9edf2;
+    --border: #d5dbe3;
+    --text: #1f2937;
+    --muted: #5b6675;
+    --accent: #e2562f;
+    --accent-2: #d97706;
+    --blue: #2563eb;
+    --green: #16a34a;
+    --purple: #7c3aed;
+    --pink: #db2777;
+    --shadow: 0 8px 30px rgba(0,0,0,.12);
+    --nav-bg: rgba(255,255,255,.85);
+    --text-strong: #2b3646;       /* 浅色下用深色正文 */
+    --line: rgba(0,0,0,.08);      /* 浅色下用深色分隔线 */
+    --white: #fff;
+    --on-accent: #fff;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -48,6 +77,14 @@
   nav .brand { font-weight: 700; color: var(--accent); margin-right: 8px; flex-shrink: 0; }
   nav a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color .2s; flex-shrink: 0; }
   nav a:hover { color: var(--text); }
+  #theme-toggle {
+    background: var(--card-2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 8px;
+    width: 34px; height: 34px; flex-shrink: 0;
+    cursor: pointer; font-size: 16px; line-height: 1;
+    transition: background .2s, border-color .2s;
+  }
+  #theme-toggle:hover { border-color: var(--accent); }
 
   header.hero {
     max-width: 1100px; margin: 0 auto; padding: 64px 24px 44px;
@@ -96,7 +133,7 @@
   .diff-card.studio h3 { color: var(--blue); }
   .diff-card.live h3 { color: var(--accent); }
   .diff-card ul { list-style: none; }
-  .diff-card li { padding: 6px 0; color: var(--muted); font-size: 14px; border-bottom: 1px dashed rgba(255,255,255,.06); }
+  .diff-card li { padding: 6px 0; color: var(--muted); font-size: 14px; border-bottom: 1px dashed var(--line); }
   .diff-card li:last-child { border-bottom: none; }
   .diff-card li b { color: var(--text); font-weight: 600; }
   .diff-card.live li b { color: var(--accent-2); }
@@ -126,7 +163,7 @@
     display: flex; align-items: center; justify-content: center;
     font-weight: 800; font-size: 17px; transition: transform .2s, background .2s;
   }
-  .module .m-head:hover .m-num { background: rgba(255,107,74,.32); color: #fff; }
+  .module .m-head:hover .m-num { background: rgba(255,107,74,.32); color: var(--on-accent); }
   .module .m-title { flex: 1; min-width: 0; }
   .module h3 { font-size: 17px; font-weight: 700; line-height: 1.4; transition: color .2s; }
   .module .m-head:hover h3 { color: var(--accent-2); }
@@ -147,7 +184,7 @@
     50% { opacity: .45; }
   }
   .module .m-head:hover .toggle {
-    color: #fff; background: var(--accent); transform: scale(1.15);
+    color: var(--white); background: var(--accent); transform: scale(1.15);
     animation: togglePulse 1s ease-in-out infinite;
   }
   .module.open .toggle { transform: rotate(45deg); color: var(--accent); animation: none; }
@@ -166,16 +203,16 @@
   }
   .module.open .m-head::after {
     content: "收起"; color: var(--muted); border-color: var(--border);
-    background: rgba(255,255,255,.05);
+    background: var(--line);
   }
   .module ul { list-style: none; margin-top: 12px; }
   .module li {
-    position: relative; padding: 4px 0 4px 18px; color: #c9d4e0; font-size: 14px;
+    position: relative; padding: 4px 0 4px 18px; color: var(--text-strong); font-size: 14px;
   }
   .module li::before {
     content: "›"; position: absolute; left: 3px; top: 4px; color: var(--accent); font-weight: 700;
   }
-  .module li b { color: #fff; font-weight: 600; }
+  .module li b { color: var(--white); font-weight: 600; }
 
   /* 展开的操作细节 */
   .module .detail {
@@ -190,7 +227,7 @@
   .detail ol { list-style: none; counter-reset: step; }
   .detail ol li {
     counter-increment: step; position: relative; padding: 5px 0 5px 26px;
-    font-size: 13px; color: #c9d4e0;
+    font-size: 13px; color: var(--text-strong);
   }
   .detail ol li::before {
     content: counter(step); position: absolute; left: 0; top: 7px;
@@ -198,16 +235,16 @@
     background: rgba(255,107,74,.15); color: var(--accent);
     font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center;
   }
-  .detail ol li b { color: #fff; }
+  .detail ol li b { color: var(--on-accent); }
 
   /* 工作流时间线 */
   .timeline { margin-top: 4px; }
   .tl-item {
-    position: relative; padding: 5px 0 5px 24px; font-size: 13px; color: #c9d4e0;
+    position: relative; padding: 5px 0 5px 24px; font-size: 13px; color: var(--text-strong);
     border-left: 2px solid var(--border);
   }
   .tl-item .time { color: var(--accent-2); font-weight: 700; margin-right: 8px; white-space: nowrap; }
-  .tl-item b { color: #fff; }
+  .tl-item b { color: var(--on-accent); }
 
   /* 数字音频协议表 */
   .proto-wrap { overflow-x: auto; margin-top: 10px; }
@@ -216,7 +253,7 @@
     border: 1px solid var(--border); padding: 7px 9px; text-align: left; vertical-align: top;
   }
   .proto-table th { background: var(--card-2); color: var(--text); font-weight: 600; white-space: nowrap; }
-  .proto-table td { color: #c9d4e0; }
+  .proto-table td { color: var(--text-strong); }
   .proto-table td:first-child { color: var(--accent-2); font-weight: 600; white-space: nowrap; }
 
   /* 重点 */
@@ -236,7 +273,7 @@
   }
   .stage .phase {
     position: absolute; top: -13px; left: 20px;
-    background: var(--accent); color: #fff; font-size: 12px; font-weight: 700;
+    background: var(--accent); color: var(--on-accent); font-size: 12px; font-weight: 700;
     border-radius: 999px; padding: 4px 14px; letter-spacing: 1px;
   }
   .stage h3 { margin: 8px 0 4px; font-size: 17px; }
@@ -322,7 +359,7 @@
   #lock input:focus { border-color: var(--accent); }
   #lock button {
     width: 100%; padding: 12px; border-radius: 10px; border: none;
-    background: var(--accent); color: #fff; font-size: 16px; font-weight: 700;
+    background: var(--accent); color: var(--on-accent); font-size: 16px; font-weight: 700;
     cursor: pointer; transition: background .2s;
   }
   #lock button:hover { background: #ff8266; }
@@ -348,6 +385,7 @@
 <nav>
   <div class="inner">
     <span class="brand">▶ FOH</span>
+    <button id="theme-toggle" title="切换深/浅色主题" aria-label="切换主题">🌙</button>
     <a href="#mindset">认知差异</a>
     <a href="#workflow">现场工作流</a>
     <a href="#framework">七大方向</a>
@@ -1553,6 +1591,31 @@
 </footer>
 
 <script>
+  // 主题切换（深/浅色）
+  const THEME_KEY = 'foh-theme';
+  const themeToggle = document.getElementById('theme-toggle');
+  function applyTheme(theme) {
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      if (themeToggle) themeToggle.textContent = '🌙';
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      if (themeToggle) themeToggle.textContent = '☀️';
+    }
+  }
+  // 读取本地记住的主题（默认深色）
+  let savedTheme = 'dark';
+  try { savedTheme = localStorage.getItem(THEME_KEY) || 'dark'; } catch (e) {}
+  applyTheme(savedTheme);
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.hasAttribute('data-theme') ? 'light' : 'dark';
+      const next = current === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+      try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+    });
+  }
+
   // 密码锁
   const PASS = atob('c291bmRtYW4='); // soundman
   const lockEl = document.getElementById('lock');
