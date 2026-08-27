@@ -105,12 +105,13 @@
   .modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
   .module {
     background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 22px; box-shadow: var(--shadow); transition: transform .2s, border-color .2s;
+    padding: 22px; box-shadow: var(--shadow); transition: transform .2s, border-color .2s, background .25s;
     position: relative; overflow: hidden;
     cursor: pointer;
   }
   .module:hover {
     transform: translateY(-4px); border-color: var(--accent);
+    background: linear-gradient(145deg, rgba(255,107,74,.18), rgba(255,107,74,.08));
     box-shadow: 0 8px 30px rgba(255,107,74,.28);
   }
   .module.open { border-color: var(--accent); }
@@ -118,10 +119,9 @@
     display: flex; align-items: flex-start; gap: 12px;
     cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent;
     margin: -22px; padding: 22px; /* 让整卡头部都是可点区 */
-    border-radius: var(--radius); transition: background .2s;
+    border-radius: var(--radius);
     position: relative;
   }
-  .module .m-head:hover { background: rgba(255,107,74,.06); }
   .module .m-num {
     width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
@@ -1573,10 +1573,10 @@
   passInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
   passInput.focus();
 
-  // 卡片展开/收起（模块与故障卡共用）
-  const heads = document.querySelectorAll('.module .m-head');
-  heads.forEach(h => h.addEventListener('click', () => {
-    h.parentElement.classList.toggle('open');
+  // 卡片展开/收起（整个卡片可点击展开）
+  const mods = document.querySelectorAll('.module');
+  mods.forEach(m => m.addEventListener('click', () => {
+    m.classList.toggle('open');
   }));
 
   // 自检清单（localStorage 持久化）
