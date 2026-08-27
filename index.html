@@ -27,6 +27,8 @@
     --line: rgba(255,255,255,.06); /* 细分隔线 */
     --white: #fff;                /* 强调底上的白字 */
     --on-accent: #fff;
+    --accent-rgb: 255, 107, 74;   /* 橙红 */
+    --accent2-rgb: 255, 177, 74;  /* 橙黄 */
   }
 
   /* 浅色主题 */
@@ -38,9 +40,9 @@
     --border: #d5dbe3;
     --text: #1f2937;
     --muted: #5b6675;
-    --accent: #e2562f;
-    --accent-2: #d97706;
-    --blue: #2563eb;
+    --accent: #0d9488;        /* 湖蓝 teal 主色 */
+    --accent-2: #06b6d4;      /* 亮蓝 cyan 辅助 */
+    --blue: #0891b2;
     --green: #16a34a;
     --purple: #7c3aed;
     --pink: #db2777;
@@ -50,6 +52,8 @@
     --line: rgba(0,0,0,.08);      /* 浅色下用深色分隔线 */
     --white: #fff;
     --on-accent: #fff;
+    --accent-rgb: 13, 148, 136;   /* 湖蓝 teal */
+    --accent2-rgb: 6, 182, 212;   /* 亮蓝 cyan */
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -60,11 +64,11 @@
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
   }
-  ::selection { background: rgba(255,107,74,.4); }
+  ::selection { background: rgba(var(--accent-rgb),.4); }
 
   nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(13,17,23,.85);
+    background: var(--nav-bg);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 0 24px;
@@ -91,8 +95,8 @@
     text-align: center;
   }
   .hero .tag {
-    display: inline-block; background: rgba(255,107,74,.15); color: var(--accent);
-    border: 1px solid rgba(255,107,74,.4); border-radius: 999px;
+    display: inline-block; background: rgba(var(--accent-rgb),.15); color: var(--accent);
+    border: 1px solid rgba(var(--accent-rgb),.4); border-radius: 999px;
     padding: 6px 18px; font-size: 13px; letter-spacing: 1px; margin-bottom: 20px;
   }
   .hero h1 {
@@ -117,7 +121,7 @@
   }
   section h2 .idx {
     font-size: 15px; color: var(--accent); font-weight: 700;
-    background: rgba(255,107,74,.12); border: 1px solid rgba(255,107,74,.35);
+    background: rgba(var(--accent-rgb),.12); border: 1px solid rgba(var(--accent-rgb),.35);
     border-radius: 8px; padding: 2px 10px; letter-spacing: 1px;
   }
   section .lead { color: var(--muted); margin-bottom: 24px; font-size: 15px; }
@@ -148,7 +152,7 @@
   }
   .module:hover {
     transform: translateY(-4px); border-color: var(--accent);
-    box-shadow: 0 0 0 1px rgba(255,107,74,.5), 0 10px 24px rgba(255,107,74,.14);
+    box-shadow: 0 0 0 1px rgba(var(--accent-rgb),.5), 0 10px 24px rgba(var(--accent-rgb),.14);
   }
   .module.open { border-color: var(--accent); }
   .module .m-head {
@@ -163,13 +167,13 @@
     display: flex; align-items: center; justify-content: center;
     font-weight: 800; font-size: 17px; transition: transform .2s, background .2s;
   }
-  .module .m-head:hover .m-num { background: rgba(255,107,74,.32); color: var(--on-accent); }
+  .module .m-head:hover .m-num { background: rgba(var(--accent-rgb),.32); color: var(--on-accent); }
   .module .m-title { flex: 1; min-width: 0; }
   .module h3 { font-size: 17px; font-weight: 700; line-height: 1.4; transition: color .2s; }
   .module .m-head:hover h3 { color: var(--accent-2); }
   .module .method {
     display: inline-block; margin-top: 5px; font-size: 13px; color: var(--accent-2);
-    background: rgba(255,177,74,.1); border: 1px solid rgba(255,177,74,.3);
+    background: rgba(var(--accent2-rgb),.1); border: 1px solid rgba(var(--accent2-rgb),.3);
     border-radius: 6px; padding: 2px 10px;
   }
   .module .toggle {
@@ -193,13 +197,13 @@
     content: "点击展开";
     position: absolute; top: 10px; right: 54px; /* 避开右侧箭头 */
     font-size: 11px; line-height: 1; color: var(--accent-2);
-    background: rgba(255,177,74,.12); border: 1px solid rgba(255,177,74,.35);
+    background: rgba(var(--accent2-rgb),.12); border: 1px solid rgba(var(--accent2-rgb),.35);
     border-radius: 999px; padding: 4px 10px; white-space: nowrap;
     opacity: .7; transition: opacity .2s, background .2s;
     pointer-events: none;
   }
   .module .m-head:hover::after {
-    opacity: 1; background: rgba(255,177,74,.22);
+    opacity: 1; background: rgba(var(--accent2-rgb),.22);
   }
   .module.open .m-head::after {
     content: "收起"; color: var(--muted); border-color: var(--border);
@@ -212,7 +216,7 @@
   .module li::before {
     content: "›"; position: absolute; left: 3px; top: 4px; color: var(--accent); font-weight: 700;
   }
-  .module li b { color: var(--white); font-weight: 600; }
+  .module li b { color: var(--text-strong); font-weight: 600; }
 
   /* 展开的操作细节 */
   .module .detail {
@@ -232,10 +236,10 @@
   .detail ol li::before {
     content: counter(step); position: absolute; left: 0; top: 7px;
     width: 17px; height: 17px; border-radius: 50%;
-    background: rgba(255,107,74,.15); color: var(--accent);
+    background: rgba(var(--accent-rgb),.15); color: var(--accent);
     font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center;
   }
-  .detail ol li b { color: var(--on-accent); }
+  .detail ol li b { color: var(--text-strong); }
 
   /* 工作流时间线 */
   .timeline { margin-top: 4px; }
@@ -244,7 +248,7 @@
     border-left: 2px solid var(--border);
   }
   .tl-item .time { color: var(--accent-2); font-weight: 700; margin-right: 8px; white-space: nowrap; }
-  .tl-item b { color: var(--on-accent); }
+  .tl-item b { color: var(--text-strong); }
 
   /* 数字音频协议表 */
   .proto-wrap { overflow-x: auto; margin-top: 10px; }
@@ -296,7 +300,7 @@
   .check-item:hover { background: var(--card-2); }
   .check-item input { margin-top: 4px; width: 17px; height: 17px; accent-color: var(--accent); cursor: pointer; }
   .check-item label { font-size: 14px; cursor: pointer; color: var(--muted); transition: color .2s; }
-  .check-item input:checked + label { color: var(--text); text-decoration: line-through; text-decoration-color: rgba(255,107,74,.5); }
+  .check-item input:checked + label { color: var(--text); text-decoration: line-through; text-decoration-color: rgba(var(--accent-rgb),.5); }
   .progress { margin-bottom: 18px; font-size: 14px; color: var(--muted); }
   .progress .bar { height: 8px; background: var(--card-2); border-radius: 999px; margin-top: 8px; overflow: hidden; }
   .progress .fill {
