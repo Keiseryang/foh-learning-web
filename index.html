@@ -265,9 +265,48 @@
     .diff-grid { grid-template-columns: 1fr; }
     nav .inner { gap: 14px; }
   }
+
+  /* 密码锁 */
+  #lock {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #lock .lock-box { text-align: center; max-width: 340px; width: 90%; padding: 20px; }
+  #lock .lock-icon { font-size: 52px; margin-bottom: 14px; }
+  #lock h2 { font-size: 20px; margin-bottom: 6px; letter-spacing: 1px; }
+  #lock .lock-sub { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+  #lock input {
+    width: 100%; padding: 12px 14px; border-radius: 10px;
+    border: 1px solid var(--border); background: var(--card);
+    color: var(--text); font-size: 16px; text-align: center; outline: none;
+    margin-bottom: 12px; transition: border-color .2s;
+  }
+  #lock input:focus { border-color: var(--accent); }
+  #lock button {
+    width: 100%; padding: 12px; border-radius: 10px; border: none;
+    background: var(--accent); color: #fff; font-size: 16px; font-weight: 700;
+    cursor: pointer; transition: background .2s;
+  }
+  #lock button:hover { background: #ff8266; }
+  .lock-err { display: none; color: #ff6b6b; font-size: 13px; margin-top: 10px; }
+  .lock-tip { margin-top: 14px; font-size: 12px; color: var(--muted); opacity: .7; }
 </style>
 </head>
 <body>
+
+<!-- 密码锁 -->
+<div id="lock">
+  <div class="lock-box">
+    <div class="lock-icon">🔒</div>
+    <h2>现场调音师学习框架</h2>
+    <p class="lock-sub">本页面已加密，请输入访问密码</p>
+    <input type="password" id="lock-pass" placeholder="请输入密码" autocomplete="off">
+    <button id="lock-btn">进入</button>
+    <p class="lock-err" id="lock-err">密码错误，请重试</p>
+    <p class="lock-tip">密码由页面所有者授权提供</p>
+  </div>
+</div>
 
 <nav>
   <div class="inner">
@@ -1477,6 +1516,25 @@
 </footer>
 
 <script>
+  // 密码锁
+  const PASS = atob('c291bmRtYW4='); // soundman
+  const lockEl = document.getElementById('lock');
+  const passInput = document.getElementById('lock-pass');
+  const lockBtn = document.getElementById('lock-btn');
+  const lockErr = document.getElementById('lock-err');
+  function tryUnlock() {
+    if (passInput.value === PASS) {
+      lockEl.style.display = 'none';
+    } else {
+      lockErr.style.display = 'block';
+      passInput.value = '';
+      passInput.focus();
+    }
+  }
+  lockBtn.addEventListener('click', tryUnlock);
+  passInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+  passInput.focus();
+
   // 卡片展开/收起（模块与故障卡共用）
   const heads = document.querySelectorAll('.module .m-head');
   heads.forEach(h => h.addEventListener('click', () => {
