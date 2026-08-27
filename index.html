@@ -111,8 +111,7 @@
   }
   .module:hover {
     transform: translateY(-4px); border-color: var(--accent);
-    background: linear-gradient(145deg, rgba(255,107,74,.18), rgba(255,107,74,.08));
-    box-shadow: 0 8px 30px rgba(255,107,74,.28);
+    box-shadow: 0 0 0 1px rgba(255,107,74,.5), 0 10px 24px rgba(255,107,74,.14);
   }
   .module.open { border-color: var(--accent); }
   .module .m-head {
@@ -171,12 +170,12 @@
   }
   .module ul { list-style: none; margin-top: 12px; }
   .module li {
-    position: relative; padding: 4px 0 4px 18px; color: var(--muted); font-size: 14px;
+    position: relative; padding: 4px 0 4px 18px; color: #c9d4e0; font-size: 14px;
   }
   .module li::before {
     content: "›"; position: absolute; left: 3px; top: 4px; color: var(--accent); font-weight: 700;
   }
-  .module li b { color: var(--text); font-weight: 600; }
+  .module li b { color: #fff; font-weight: 600; }
 
   /* 展开的操作细节 */
   .module .detail {
@@ -191,7 +190,7 @@
   .detail ol { list-style: none; counter-reset: step; }
   .detail ol li {
     counter-increment: step; position: relative; padding: 5px 0 5px 26px;
-    font-size: 13px; color: var(--muted);
+    font-size: 13px; color: #c9d4e0;
   }
   .detail ol li::before {
     content: counter(step); position: absolute; left: 0; top: 7px;
@@ -199,16 +198,16 @@
     background: rgba(255,107,74,.15); color: var(--accent);
     font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center;
   }
-  .detail ol li b { color: var(--text); }
+  .detail ol li b { color: #fff; }
 
   /* 工作流时间线 */
   .timeline { margin-top: 4px; }
   .tl-item {
-    position: relative; padding: 5px 0 5px 24px; font-size: 13px; color: var(--muted);
+    position: relative; padding: 5px 0 5px 24px; font-size: 13px; color: #c9d4e0;
     border-left: 2px solid var(--border);
   }
   .tl-item .time { color: var(--accent-2); font-weight: 700; margin-right: 8px; white-space: nowrap; }
-  .tl-item b { color: var(--text); }
+  .tl-item b { color: #fff; }
 
   /* 数字音频协议表 */
   .proto-wrap { overflow-x: auto; margin-top: 10px; }
@@ -217,7 +216,7 @@
     border: 1px solid var(--border); padding: 7px 9px; text-align: left; vertical-align: top;
   }
   .proto-table th { background: var(--card-2); color: var(--text); font-weight: 600; white-space: nowrap; }
-  .proto-table td { color: var(--muted); }
+  .proto-table td { color: #c9d4e0; }
   .proto-table td:first-child { color: var(--accent-2); font-weight: 600; white-space: nowrap; }
 
   /* 重点 */
