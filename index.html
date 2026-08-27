@@ -1573,11 +1573,26 @@
   passInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
   passInput.focus();
 
-  // 卡片展开/收起（整个卡片可点击展开）
+  // 卡片展开/收起（整卡可点，拖拽选文字与展开内容区不触发）
   const mods = document.querySelectorAll('.module');
-  mods.forEach(m => m.addEventListener('click', () => {
-    m.classList.toggle('open');
-  }));
+  let downPoint = null;
+  mods.forEach(m => {
+    // 记录按下位置，用于区分“点击”和“拖拽选文字”
+    m.addEventListener('mousedown', e => {
+      downPoint = { x: e.clientX, y: e.clientY };
+    });
+    m.addEventListener('click', e => {
+      // 1) 拖拽选文字后松开 → 不触发展开/收起
+      if (downPoint) {
+        const dx = Math.abs(e.clientX - downPoint.x);
+        const dy = Math.abs(e.clientY - downPoint.y);
+        if (dx > 6 || dy > 6) return; // 有移动 = 拖拽，忽略
+      }
+      // 2) 展开后，点击展开的内容区不触发收起
+      if (e.target.closest('.detail')) return;
+      m.classList.toggle('open');
+    });
+  });
 
   // 自检清单（localStorage 持久化）
   const LS_CHECK = 'foh-checklist';
