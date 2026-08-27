@@ -461,7 +461,6 @@
   <div class="inner">
     <span class="brand">▶ FOH</span>
     <button id="theme-toggle" title="切换深/浅色主题" aria-label="切换主题">🌙</button>
-    <button class="nav-exam" id="exam-toggle" title="娱乐测试">🎓 考试（娱乐版）</button>
     <a href="#mindset">认知差异</a>
     <a href="#workflow">现场工作流</a>
     <a href="#framework">七大方向</a>
@@ -471,6 +470,7 @@
     <a href="#trouble">故障排查</a>
     <a href="#glossary">术语表</a>
     <a href="#plan">30 天计划</a>
+    <button class="nav-exam" id="exam-toggle" title="娱乐测试">🎓 考试（娱乐版）</button>
   </div>
 </nav>
 
@@ -1646,6 +1646,41 @@
   <p style="margin-top:12px;opacity:.6">Studio → FOH 方向指南 · 建议收藏</p>
 </footer>
 
+<!-- 娱乐考试浮层 -->
+<div class="exam-modal" id="exam-modal">
+  <div class="exam-modal-box">
+    <button class="exam-close" id="exam-close" title="关闭">✕</button>
+    <h2 class="exam-title">🎓 考试（娱乐版）</h2>
+    <p class="exam-sub">随机抽 10 道题，每题 10 分，共 100 分，<b style="color:var(--accent)">80 分以上合格</b>。玩得开心！</p>
+    <div class="exam" id="exam-wrap">
+<div class="exam">
+    <div class="exam-start" id="exam-start">
+      <div class="exam-info">
+        <div class="exam-stat"><b>10</b><span>题目数</span></div>
+        <div class="exam-stat"><b>100</b><span>总分</span></div>
+        <div class="exam-stat"><b>80</b><span>合格线</span></div>
+      </div>
+      <button id="start-exam" class="exam-btn">开始考试</button>
+    </div>
+    <div class="exam-body" id="exam-body" style="display:none">
+      <div class="exam-progress">
+        第 <b id="q-now">1</b> / <span id="q-total">10</span> 题
+        <div class="bar"><div class="fill" id="exam-fill"></div></div>
+      </div>
+      <div id="exam-questions"></div>
+      <button id="submit-exam" class="exam-btn">交卷</button>
+    </div>
+    <div class="exam-result" id="exam-result" style="display:none">
+      <div class="result-score" id="result-score">0</div>
+      <div class="result-verdict" id="result-verdict"></div>
+      <div class="result-detail" id="result-detail"></div>
+      <button id="retry-exam" class="exam-btn">再考一次</button>
+    </div>
+  </div>
+    </div>
+  </div>
+</div>
+
 <script>
   // 主题切换（深/浅色）
   const THEME_KEY = 'foh-theme';
@@ -1933,41 +1968,6 @@
     if (e.key === 'Escape' && examModal.classList.contains('open')) closeExam();
   });
 </script>
-
-<!-- 娱乐考试浮层 -->
-<div class="exam-modal" id="exam-modal">
-  <div class="exam-modal-box">
-    <button class="exam-close" id="exam-close" title="关闭">✕</button>
-    <h2 class="exam-title">🎓 考试（娱乐版）</h2>
-    <p class="exam-sub">随机抽 10 道题，每题 10 分，共 100 分，<b style="color:var(--accent)">80 分以上合格</b>。玩得开心！</p>
-    <div class="exam" id="exam-wrap">
-<div class="exam">
-    <div class="exam-start" id="exam-start">
-      <div class="exam-info">
-        <div class="exam-stat"><b>10</b><span>题目数</span></div>
-        <div class="exam-stat"><b>100</b><span>总分</span></div>
-        <div class="exam-stat"><b>80</b><span>合格线</span></div>
-      </div>
-      <button id="start-exam" class="exam-btn">开始考试</button>
-    </div>
-    <div class="exam-body" id="exam-body" style="display:none">
-      <div class="exam-progress">
-        第 <b id="q-now">1</b> / <span id="q-total">10</span> 题
-        <div class="bar"><div class="fill" id="exam-fill"></div></div>
-      </div>
-      <div id="exam-questions"></div>
-      <button id="submit-exam" class="exam-btn">交卷</button>
-    </div>
-    <div class="exam-result" id="exam-result" style="display:none">
-      <div class="result-score" id="result-score">0</div>
-      <div class="result-verdict" id="result-verdict"></div>
-      <div class="result-detail" id="result-detail"></div>
-      <button id="retry-exam" class="exam-btn">再考一次</button>
-    </div>
-  </div>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>
