@@ -369,6 +369,46 @@
   #lock button:hover { background: #ff8266; }
   .lock-err { display: none; color: #ff6b6b; font-size: 13px; margin-top: 10px; }
   .lock-tip { margin-top: 14px; font-size: 12px; color: var(--muted); opacity: .7; }
+
+  /* 模拟考试 */
+  .exam { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+  .exam-start { text-align: center; padding: 30px 0; }
+  .exam-info { display: flex; justify-content: center; gap: 32px; margin-bottom: 28px; flex-wrap: wrap; }
+  .exam-stat { text-align: center; }
+  .exam-stat b { display: block; font-size: 30px; font-weight: 800; color: var(--accent); }
+  .exam-stat span { font-size: 13px; color: var(--muted); }
+  .exam-btn {
+    display: inline-block; padding: 12px 40px; border-radius: 10px; border: none;
+    background: var(--accent); color: var(--on-accent); font-size: 16px; font-weight: 700;
+    cursor: pointer; transition: background .2s, transform .15s;
+  }
+  .exam-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+  .exam-progress { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+  .exam-progress b { color: var(--accent); }
+  .exam-progress .bar { height: 8px; background: var(--card-2); border-radius: 999px; margin-top: 8px; overflow: hidden; }
+  .exam-progress .fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 999px; transition: width .3s; }
+  .exam-q { margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px dashed var(--line); }
+  .exam-q:last-child { border-bottom: none; }
+  .exam-q-head { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 12px; line-height: 1.6; }
+  .exam-opts { display: flex; flex-direction: column; gap: 8px; }
+  .exam-opt {
+    display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px;
+    border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: border-color .15s, background .15s;
+  }
+  .exam-opt:hover { border-color: var(--accent); background: rgba(var(--accent-rgb), .08); }
+  .exam-opt input { margin-top: 3px; accent-color: var(--accent); width: 17px; height: 17px; flex-shrink: 0; }
+  .exam-opt span { font-size: 14px; color: var(--text); }
+  .exam-result { text-align: center; padding: 24px 0; }
+  .result-score { font-size: 68px; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+  .result-verdict { font-size: 24px; font-weight: 700; margin-bottom: 24px; }
+  .result-verdict.pass { color: var(--green); }
+  .result-verdict.fail { color: var(--accent); }
+  .result-detail { text-align: left; max-width: 640px; margin: 0 auto 24px; }
+  .result-row { font-size: 13px; color: var(--muted); padding: 8px 0; border-bottom: 1px dashed var(--line); }
+  .result-row.ok b { color: var(--green); }
+  .result-row.bad b { color: var(--accent); }
+  .result-exp { display: block; font-size: 12px; color: var(--muted); opacity: .85; margin-top: 3px; padding-left: 20px; }
+
 </style>
 </head>
 <body>
@@ -395,7 +435,7 @@
     <a href="#framework">七大方向</a>
     <a href="#keypoints">核心重点</a>
     <a href="#roadmap">学习路线</a>
-    <a href="#checklist">能力自检</a>
+    <a href="#checklist">模拟考试</a>
     <a href="#gear">设备速查</a>
     <a href="#trouble">故障排查</a>
     <a href="#glossary">术语表</a>
@@ -848,28 +888,36 @@
   </div>
 </section>
 
-<!-- 能力自检 -->
+<!-- 模拟考试 -->
 <section id="checklist">
-  <h2><span class="idx">06</span>能力自检清单</h2>
-  <p class="lead">学员可勾选已掌握的能力，实时查看进度。</p>
-  <div class="checklist">
-    <div class="progress">
-      已完成 <b id="count">0</b> / <span id="total">10</span> 项
-      <div class="bar"><div class="fill" id="fill"></div></div>
+  <h2><span class="idx">06</span>模拟考试 · 现场调音师能力测验</h2>
+  <p class="lead">随机抽 10 道现场场景题，每题 10 分，共 100 分。<b style="color:var(--accent)">80 分以上合格</b>。点「开始考试」随机生成题目，答完交卷看结果。</p>
+  <div class="exam">
+    <div class="exam-start" id="exam-start">
+      <div class="exam-info">
+        <div class="exam-stat"><b>10</b><span>题目数</span></div>
+        <div class="exam-stat"><b>100</b><span>总分</span></div>
+        <div class="exam-stat"><b>80</b><span>合格线</span></div>
+      </div>
+      <button id="start-exam" class="exam-btn">开始考试</button>
     </div>
-    <div class="grid" id="list">
-      <div class="check-item"><input type="checkbox"><label>能解释线阵列与点声源的覆盖区别</label></div>
-      <div class="check-item"><input type="checkbox"><label>能在 15 秒内定位并压住一次啸叫</label></div>
-      <div class="check-item"><input type="checkbox"><label>独立完成一场演出的 Soundcheck 流程</label></div>
-      <div class="check-item"><input type="checkbox"><label>至少吃透一台主流数字调音台（信号流 + 快照）</label></div>
-      <div class="check-item"><input type="checkbox"><label>会用 Dante Controller 做设备订阅</label></div>
-      <div class="check-item"><input type="checkbox"><label>有 Monitor / 返送混音经验</label></div>
-      <div class="check-item"><input type="checkbox"><label>掌握 IEM 入耳监听混音思路</label></div>
-      <div class="check-item"><input type="checkbox"><label>会用 Smaart 做基本系统测量</label></div>
-      <div class="check-item"><input type="checkbox"><label>能处理舞台串音与相位问题</label></div>
-      <div class="check-item"><input type="checkbox"><label>现场混音会保留 15–20dB Headroom</label></div>
+    <div class="exam-body" id="exam-body" style="display:none">
+      <div class="exam-progress">
+        第 <b id="q-now">1</b> / <span id="q-total">10</span> 题
+        <div class="bar"><div class="fill" id="exam-fill"></div></div>
+      </div>
+      <div id="exam-questions"></div>
+      <button id="submit-exam" class="exam-btn">交卷</button>
+    </div>
+    <div class="exam-result" id="exam-result" style="display:none">
+      <div class="result-score" id="result-score">0</div>
+      <div class="result-verdict" id="result-verdict"></div>
+      <div class="result-detail" id="result-detail"></div>
+      <button id="retry-exam" class="exam-btn">再考一次</button>
     </div>
   </div>
+</section>
+
 </section>
 
 <!-- 设备知识库 -->
@@ -1660,30 +1708,7 @@
     });
   });
 
-  // 自检清单（localStorage 持久化）
-  const LS_CHECK = 'foh-checklist';
-  const boxes = document.querySelectorAll('#list input');
-  const count = document.getElementById('count');
-  const total = document.getElementById('total');
-  const fill = document.getElementById('fill');
-  total.textContent = boxes.length;
-  function update() {
-    const done = [...boxes].filter(b => b.checked).length;
-    count.textContent = done;
-    fill.style.width = (done / boxes.length * 100) + '%';
-  }
-  function saveCheck() {
-    localStorage.setItem(LS_CHECK, JSON.stringify([...boxes].map(b => b.checked)));
-  }
-  function loadCheck() {
-    try {
-      const saved = JSON.parse(localStorage.getItem(LS_CHECK));
-      if (Array.isArray(saved)) boxes.forEach((b, i) => { if (saved[i]) b.checked = true; });
-    } catch (e) {}
-    update();
-  }
-  boxes.forEach(b => b.addEventListener('change', () => { update(); saveCheck(); }));
-  loadCheck();
+  // 模拟考试（题库见下）
 
   // 30 天训练计划（localStorage 持久化）
   const LS_PLAN = 'foh-plan30';
@@ -1723,6 +1748,158 @@
     });
   });
   loadPlan();
+
+  // ================= 模拟考试 =================
+  // 题库：现场调音师场景题（每道题10分）
+  const EXAM_BANK = [
+    { // 1
+      scene: "小型演出，你一人包办 FOH + Monitor。试音时主唱话筒突然持续啸叫，你该优先？",
+      options: ["立刻推高话筒增益", "先快速压返送增益止住", "直接关掉主扩", "换一只新的话筒"],
+      answer: 1, explain: "啸叫首要任务是先止住。快速压返送/增益，再认频率拉陷波，最后调话筒指向。"
+    },
+    { // 2
+      scene: "中型演出现场，推某个通道没声，其他通道正常。最该先做的排查是？",
+      options: ["重装系统", "换一根线（最快验证）", "重启调音台", "检查音箱分频"],
+      answer: 1, explain: "单通道无声先换线验证——排除线缆问题，再查口、静音、增益、话筒电源。"
+    },
+    { // 3
+      scene: "演出中整个系统突然全无声，但调音台输出电平正常。问题大概率在？",
+      options: ["输入增益太低", "主输出/矩阵或处理器到功放那一级", "话筒没电", "乐手弹太轻"],
+      answer: 1, explain: "台子有输出却没声，说明问题在台子之后：主输出/矩阵、处理器、功放、线、音箱。逐级送信号排查。"
+    },
+    { // 4
+      scene: "现场混音时，乐手弹奏很猛，你该如何设置增益架构？",
+      options: ["留 15–20dB 余量，先砍后提", "推满避免太轻", "不设余量靠后面压缩", "把台子输出拉满"],
+      answer: 0, explain: "现场必须预留 15–20dB 动态余量，防乐手瞬间推大动态，先做减法 EQ 再考虑提升。"
+    },
+    { // 5
+      scene: "监听系统，鼓手说他听不到节拍（Click），你该？",
+      options: ["把鼓组推子拉掉", "检查该通道的 Aux 发送量", "调主扩 EQ", "增加低频输出"],
+      answer: 1, explain: "返送听不见先查该通道 Aux 发送是否打开、推子/增益是否到位，再确认返送音箱。"
+    },
+    { // 6
+      scene: "多套无线话筒同开，出现频繁断频、杂音。最可能的原因是？",
+      options: ["电池太足", "频点冲突或天线位置不对", "音箱太响", "调音台太旧"],
+      answer: 1, explain: "无线断频多为频点冲突、天线位置/朝向不对、电池电量低、现场射频干扰。用接收机扫频重新分配。"
+    },
+    { // 7
+      scene: "两只话筒拾同一声源，低频明显抵消。你该？",
+      options: ["加大两只话筒距离", "检查并反相其中一只", "提高话筒增益", "加更多 EQ"],
+      answer: 1, explain: "两只麦拾同一声源会出现相位抵消损低频。检查极性，反相其中一支可恢复。"
+    },
+    { // 8
+      scene: "大型演出需要做频率协调，涉及几十套无线和 IEM。你该用什么工具？",
+      options: ["只靠耳朵", "Shure Wireless Workbench / Sennheiser WSM", "随便设频点", "关掉电视"],
+      answer: 1, explain: "大系统频率协调用专业工具（Wireless Workbench / WSM），统筹电视广播占用，留出间隔。"
+    },
+    { // 9
+      scene: "演出中某个座位低音过量或缺失，其他位置正常。最可能？",
+      options: ["增益设错", "超低与主扩相位未对齐 / 覆盖不均（驻波）", "话筒坏了", "人声太多"],
+      answer: 1, explain: "局部低频怪声常因超低与主扩相位未对齐、房间驻波、覆盖不均。用 Smaart 查相位、走动听覆盖。"
+    },
+    { // 10
+      scene: "数字调音台换歌时，你希望只恢复部分参数、不误动增益。应该用？",
+      options: ["全量场景", "Recall Scope（只恢复需要的范围）", "手动重推", "重开会话"],
+      answer: 1, explain: "用 Recall Scope 限定快照只恢复需要的范围（如仅 EQ/推子），避免误动其他参数。"
+    },
+    { // 11
+      scene: "现场声音失真，但推子不高。第一处该看的是？",
+      options: ["音箱分频", "输入前置增益（是否削波）", "监听音量", "台子背景灯"],
+      answer: 1, explain: "推子不高却破，多为输入前置增益过高削波。看 PFL 电平表，降增益，重做增益架构。"
+    },
+    { // 12
+      scene: "中小型演出只有你和 2-3 位舞台助理。职责如何划分？",
+      options: ["你只推 FOH，助理什么都管", "你兼顾 FOH + Monitor，助理管舞台摆位/线检/换麦", "你只做 Monitor", "助理负责混音"],
+      answer: 1, explain: "小型/中小型你一人兼顾 FOH+Monitor，舞台（摆位、线检、换麦、艺人沟通）交给助理。"
+    },
+    { // 13
+      scene: "返送系统开嗓前，为避免演出中啸叫，最佳做法是？",
+      options: ["演出中再处理", "先做 Ring Out（逐频点压反馈）", "把返送关小", "只用盒底返送"],
+      answer: 1, explain: "返送先做 Ring Out，逐频点压掉易啸叫的频点，演出中返送基本不动。"
+    },
+    { // 14
+      scene: "现场串音严重，踩镲声音漏进人声话筒。降低串音最有效的是？",
+      options: ["加很多 EQ", "用指向性话筒并调整摆位避开", "开更大压缩", "提高人声增益"],
+      answer: 1, explain: "现场无隔音棚，串音靠指向性话筒 + 合理摆位避开，比后期 EQ 更有效。"
+    },
+    { // 15
+      scene: "录音 / OB 需要取信号，为避免混响压缩污染，应从哪取？",
+      options: ["FOH 混音输出", "FOH 的 dry 信号（推子前）", "舞台话筒串音", "监听输出"],
+      answer: 1, explain: "录音/OB 从 FOH 取 dry 信号，避免混响压缩等现场处理污染，获得干净素材。"
+    },
+  ];
+
+  // 考试状态
+  let currentExam = [];
+  const startBtn = document.getElementById('start-exam');
+  const examStart = document.getElementById('exam-start');
+  const examBody = document.getElementById('exam-body');
+  const examResult = document.getElementById('exam-result');
+  const examQuestions = document.getElementById('exam-questions');
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function startExam() {
+    currentExam = shuffle(EXAM_BANK).slice(0, 10);
+    examStart.style.display = 'none';
+    examResult.style.display = 'none';
+    examBody.style.display = 'block';
+    renderQuestions();
+  }
+
+  function renderQuestions() {
+    const html = currentExam.map((q, i) => {
+      const opts = q.options.map((o, oi) =>
+        `<label class="exam-opt"><input type="radio" name="q${i}" value="${oi}"><span>${o}</span></label>`
+      ).join('');
+      return `<div class="exam-q"><div class="exam-q-head">第${i+1}题 · <b>${q.scene}</b></div><div class="exam-opts">${opts}</div></div>`;
+    }).join('');
+    examQuestions.innerHTML = html;
+    document.getElementById('q-total').textContent = currentExam.length;
+    updateExamProgress();
+  }
+
+  function updateExamProgress() {
+    const answered = currentExam.filter((_, i) => {
+      const sel = document.querySelector(`input[name="q${i}"]:checked`);
+      return sel;
+    }).length;
+    document.getElementById('q-now').textContent = Math.min(answered + 1, currentExam.length);
+    document.getElementById('exam-fill').style.width = (answered / currentExam.length * 100) + '%';
+  }
+
+  function submitExam() {
+    let score = 0;
+    let detail = '';
+    currentExam.forEach((q, i) => {
+      const sel = document.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = sel ? parseInt(sel.value, 10) : -1;
+      const right = chosen === q.answer;
+      if (right) score += 10;
+      detail += `<div class="result-row ${right ? 'ok' : 'bad'}">第${i+1}题 ${right ? '✓' : '✗'} ${q.scene}<br><span class="result-exp">${q.explain}</span></div>`;
+    });
+    document.getElementById('result-score').textContent = score;
+    const verdict = document.getElementById('result-verdict');
+    const pass = score >= 80;
+    verdict.textContent = pass ? '合格！' : '不合格，再练练';
+    verdict.className = 'result-verdict ' + (pass ? 'pass' : 'fail');
+    document.getElementById('result-detail').innerHTML = detail;
+    examBody.style.display = 'none';
+    examResult.style.display = 'block';
+    window.scrollTo({ top: document.getElementById('checklist').offsetTop - 60, behavior: 'smooth' });
+  }
+
+  startBtn.addEventListener('click', startExam);
+  document.getElementById('submit-exam').addEventListener('click', submitExam);
+  document.getElementById('retry-exam').addEventListener('click', startExam);
+  examQuestions.addEventListener('change', updateExamProgress);
 </script>
 
 </body>
