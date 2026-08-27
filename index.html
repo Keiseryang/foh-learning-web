@@ -114,6 +114,19 @@
   .hero .stat .num { font-size: 30px; font-weight: 800; color: var(--accent-2); }
   .hero .stat .label { font-size: 13px; color: var(--muted); }
 
+  /* 阅读前须知 */
+  .prereq {
+    max-width: 1100px; margin: 0 auto; padding: 24px;
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 4px solid var(--accent-2); border-radius: var(--radius);
+  }
+  .prereq-head { font-size: 16px; font-weight: 800; color: var(--accent-2); margin-bottom: 8px; }
+  .prereq-lead { font-size: 14px; color: var(--text-strong); margin-bottom: 14px; }
+  .prereq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .prereq-item { background: var(--card-2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .prereq-item h4 { font-size: 14px; color: var(--accent-2); margin-bottom: 6px; }
+  .prereq-item p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
   section { max-width: 1100px; margin: 0 auto; padding: 44px 24px; }
   section h2 {
     font-size: 25px; font-weight: 800; margin-bottom: 8px; letter-spacing: .5px;
@@ -472,7 +485,7 @@
 
 <nav>
   <div class="inner">
-    <span class="brand">▶ FOH</span>
+    <span class="brand">▶ 音频工程师</span>
     <button id="theme-toggle" title="切换深/浅色主题" aria-label="切换主题">🌙</button>
     <a href="#mindset">认知差异</a>
     <a href="#workflow">现场工作流</a>
@@ -499,6 +512,17 @@
     <div class="stat"><div class="num">30</div><div class="label">天训练计划</div></div>
   </div>
 </header>
+
+<!-- 知识前置提醒 -->
+<div class="prereq">
+  <div class="prereq-head">📌 阅读前须知</div>
+  <p class="prereq-lead">这份指南建立在<b>基础知识了解之后</b>再阅读，才能更好理解。建议先掌握以下基础认知，再往下看：</p>
+  <div class="prereq-grid">
+    <div class="prereq-item"><h4>🎧 混音认知</h4><p>频谱、动态、增益结构、EQ / 压缩、混响等基本概念——不理解这些，就难以看懂现场的手法。</p></div>
+    <div class="prereq-item"><h4>🔌 线材认知</h4><p>XLR / TRS / TS、平衡与非平衡、DI 盒、信号电平——现场最先打交道的就是线。</p></div>
+    <div class="prereq-item"><h4>🖥️ 音频硬件 &amp; 软件</h4><p>调音台、音箱、话筒等硬件，以及 DAW、插件等软件的基本操作与概念。</p></div>
+  </div>
+</div>
 
 <!-- 认知差异 -->
 <section id="mindset">
